@@ -1,5 +1,5 @@
 // Fire.js
-import React, {
+import {
     useRef,
     useLayoutEffect,
     useImperativeHandle,
@@ -15,19 +15,16 @@ class FireMaterial extends THREE.ShaderMaterial {
         super({
             defines: { ITERATIONS: "10", OCTIVES: "3" },
             uniforms: {
-                fireTex: { type: "t", value: null },
-                color: { type: "c", value: null },
-                time: { type: "f", value: 0.0 },
-                seed: { type: "f", value: 0.0 },
-                invModelMatrix: { type: "m4", value: null },
-                scale: { type: "v3", value: null },
-                noiseScale: {
-                    type: "v4",
-                    value: new THREE.Vector4(1, 2, 1, 0.3),
-                },
-                magnitude: { type: "f", value: 2.5 },
-                lacunarity: { type: "f", value: 3.0 },
-                gain: { type: "f", value: 0.6 },
+                fireTex: { value: null as THREE.Texture | null },
+                color: { value: null as THREE.Color | null },
+                time: { value: 0 },
+                seed: { value: 0 },
+                invModelMatrix: { value: new THREE.Matrix4() },
+                scale: { value: new THREE.Vector3(1, 1, 1) },
+                noiseScale: { value: new THREE.Vector4(1, 2, 1, 0.3) },
+                magnitude: { value: 2.5 },
+                lacunarity: { value: 3.0 },
+                gain: { value: 0.6 },
             },
             vertexShader: `
         varying vec3 vWorldPos;
@@ -185,11 +182,10 @@ class FireMaterial extends THREE.ShaderMaterial {
     }
 }
 extend({ FireMaterial });
-
 // 2) Componente Fire
 export const Fire = forwardRef(({ color, ...props }, ref) => {
-    const meshRef = useRef();
-
+    // En Fire.tsx
+    const meshRef = useRef<THREE.Mesh>(null!);
     useImperativeHandle(ref, () => meshRef.current, []);
 
     const texture = useLoader(THREE.TextureLoader, "/fire.png");

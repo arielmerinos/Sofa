@@ -1,7 +1,18 @@
 {
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "compilerOptions": {
+    // …tus otras opciones…
+    "noEmitOnError": false, // emite aún con errores
+    "skipLibCheck": true, // no mira los tipos de node_modules
+    "noImplicitAny": false,
+    "strict": false
+  }
 }

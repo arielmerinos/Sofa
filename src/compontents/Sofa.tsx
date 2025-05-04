@@ -13,7 +13,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
-export function Sofa(props) {
+export function Sofa(props: JSX.IntrinsicElements["group"]) {
     const fireRef = useRef(null);
     const fireRef2 = useRef(null);
     useGSAP(
